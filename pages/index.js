@@ -5,15 +5,20 @@ import Router from 'next/router'
 
 class indexPage extends Component{
 
-    static async getInitialProps(contex){
+    static getInitialProps(contex){
         console.log(contex);
-        return {};
+        const promise=new Promise((resolve, reject)=>{
+            setTimeout(()=>{
+                resolve({appName: "Super App"})
+            }, 1000)
+        })
+        return promise;
     }
 
     render(){
         return(
             <div>
-                <h1>The main page</h1>
+                <h1>The main page {this.props.appName}</h1>
                 <p>Go to <Link href="/auth"><a>Auth</a></Link></p>
                 <button onClick={()=>{Router.push('/auth')}}>Go to Auth</button>
             </div>
